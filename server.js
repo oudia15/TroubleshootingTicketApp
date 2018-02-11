@@ -37,7 +37,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 //Set static Profile
-app.use(express.static(path.join(__dirname + 'public')));
+app.use(express.static(path.join(__dirname + '/client/dist')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
