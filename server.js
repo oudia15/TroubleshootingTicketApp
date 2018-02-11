@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan')
 const path = require('path');
 const bodyParser = require('body-parser');
-var methodOverride = require('method-override');
 const passport = require('passport');
 const cors = require('cors');
 const db = require('./config/db');
@@ -33,9 +32,6 @@ const tickets = require('./routes/tickets');
 
 //Morgan middleware
 app.use(morgan('dev'));
-
-// override with POST having ?_method=DELETE
-app.use(methodOverride('_method'))
 
 //cors middleware
 app.use(cors());
