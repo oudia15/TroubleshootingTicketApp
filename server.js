@@ -23,7 +23,7 @@ mongoose.connection.on('error', (error) => {
 //initialiazing express
 const app = express();
 //initialiazing port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 //importing routes
 const users = require('./routes/users');
@@ -54,8 +54,8 @@ app.use('/projects', projects);
 app.use('/tickets', tickets);
 
 //Index routes
-app.get('/', (req, res) => {
-  res.send("Home Page");
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
 
 
