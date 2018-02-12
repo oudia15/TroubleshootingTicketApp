@@ -1,16 +1,11 @@
 {
-  "name": "ticketapp",
+  "name": "ticket",
   "version": "1.0.0",
-  "description": "TroubleShooting ticket application",
-  "main": "server.js",
+  "description": "Troubleshooting ticket app",
+  "main": "server.js)",
   "scripts": {
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "troubleshooting",
-    "issue",
-    "ticket"
-  ],
   "author": "Oumar Diarra",
   "license": "MIT",
   "dependencies": {
@@ -24,6 +19,7 @@
     "passport-jwt": "^3.0.1"
   },
   "devDependencies": {
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "@angular/cli": "*"
   }
 }
