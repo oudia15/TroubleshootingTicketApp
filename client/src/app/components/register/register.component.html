@@ -1,0 +1,144 @@
+<div class="content">
+  <div class="row show-hide-message">
+    <span class="col-md-3"></span>
+    <div class = "col-md-8" [ngClass] = "messageClass">
+      {{ message }}
+    </div>
+  </div>
+  <form class="form-horizontal" [formGroup] = 'form' (submit) = 'onSubmit()'>
+          <div class="row text-center">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                  <h2>Register New User</h2>
+                  <hr>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-3 field-label-responsive">
+                  <label for="name">Username</label>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                          <input type="text" name="username" class="form-control form-control-danger" id="name"
+                                 placeholder="John Doe" required autofocus
+                                 formControlName="username"
+                                 (blur) = 'checkUsername()'>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="(form.controls.username.dirty && form.controls.username.errors) || usernameMessage">
+            <span class="col-md-3"></span>
+            <div class="col-md-6">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                          <ul class="help-block" >
+                            <li class="text text-danger" *ngIf="form.controls.username.dirty && form.controls.username.errors?.required">Username is required</li>
+                            <li class="text text-danger" *ngIf="form.controls.username.dirty && (form.controls.username.errors?.minlength || form.controls.password.errors?.maxlength)"> 5-15 characters</li>
+                            <li [ngClass] = "usernameMessageClass" *ngIf="usernameMessage"> {{ usernameMessage }}</li>
+                          </ul>
+                        </span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-3 field-label-responsive">
+                  <label for="email">E-Mail Address</label>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                          <input type="text" name="email" class="form-control" id="email"
+                                 placeholder="you@example.com" required autofocus
+                                 formControlName="email"
+                                 (blur) = 'checkEmail()'>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="(form.controls.email.dirty && form.controls.email.errors) || emailMessage">
+            <span class="col-md-3"></span>
+            <div class="col-md-8">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                          <ul class="help-block" >
+                            <li class="text text-danger" *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">Email is required</li>
+                            <li class="text text-danger" *ngIf="form.controls.email.dirty && form.controls.email.errors?.email">Valid Email Format required</li>
+                            <li  [ngClass] = "emailMessageClass" *ngIf="emailMessage"> {{ emailMessage }}</li>
+                          </ul>
+                        </span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-3 field-label-responsive">
+                  <label for="password">Password</label>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group has-danger">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                          <input type="password" name="password" class="form-control" id="password"
+                                 placeholder="Password" required
+                                 formControlName="password">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+              </div>
+          </div>
+          <div class="row" *ngIf="form.controls.password.dirty && form.controls.password.errors">
+            <span class="col-md-3"></span>
+            <div class="col-md-8">
+              <div class="form-control-feedback">
+                      <span class="text-danger align-middle">
+                        <ul class="help-block" >
+                          <li class="text text-danger" *ngIf="form.controls.password.dirty && form.controls.password.errors?.required">Password is required</li>
+                          <li class="text text-danger" *ngIf="form.controls.password.dirty && (form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength)">Password Must be at least 5 characters long and no more than 15</li>
+                          <li class="text text-danger" *ngIf="form.controls.password.dirty && form.controls.password.errors?.validatePassword">Password Must contain at least: one digit, one lower case, one upper case and one special character</li>
+                        </ul>
+                      </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-3 field-label-responsive">
+                  <label for="password">Confirm Password</label>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem">
+                              <i class="fa fa-repeat"></i>
+                          </div>
+                          <input type="password" name="confirmPassword" class="form-control"
+                                 id="password-confirm" placeholder="Password" required
+                                 formControlName="confirmPassword">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="form.controls.confirmPassword.dirty && (form.controls.confirmPassword.errors || form.errors?.matchingPasswords)">
+            <span class="col-md-3"></span>
+            <div class="col-md-8">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                          <ul class="help-block" >
+                            <li class="text text-danger" *ngIf="form.controls.confirmPassword.dirty && form.controls.confirmPassword.errors?.required"> required</li>
+                            <li class="text text-danger" *ngIf="form.controls.confirmPassword.dirty && form.errors?.matchingPasswords">Confirm Password must be equal to Password</li>
+                          </ul>
+                        </span>
+                </div>
+            </div>
+          </div>
+          <div class="row text-center">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                  <button type="submit" class="btn btn-success" [disabled]="!form.valid || processing || !emailValid || !usernameValid"><i class="fa fa-user-plus"></i> Register</button>
+              </div>
+          </div>
+        </form>
+</div>
